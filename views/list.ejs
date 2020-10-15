@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="box" id="heading">
+        <h1><%= kindOfDay %></h1> 
+    </div>
+<div class="box">
+    <!-- list item styles -->
+        <% for (var i = 0; i <newListItems.length; i++){ %>
+            <div class="item">
+                <input type="checkbox" >
+                <p><%= newListItems[i] %></p>
+            </div>
+        <% } %>
+
+        <!-- Form Styles -->
+        <form class="item" action="/" method = "post">
+            <input type="text" name ="item" placeholder="Enter a new item" autocomplete="off">
+            <input type="submit" value="+">
+        </form>
+
+</div>   
+</body>
+</html>
