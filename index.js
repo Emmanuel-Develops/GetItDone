@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 let items = [];
 let workItems = [];
-
+let miscellaneous= [];
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
@@ -29,9 +29,13 @@ app.post('/', function(req, res){
     let listType = req.body.list;
     console.log("List type is:", listType);
 
-    if(listType=== 'Work'){
+    if(listType === 'Work'){
         workItems.push(item);
         res.redirect('/work');
+    }
+    else if(listType === "Miscellaneous"){
+        miscellaneous.push(item);
+        res.redirect('/miscellaneous');
     }
     else{
         items.push(item);
@@ -45,6 +49,10 @@ app.get('/work', function(req, res){
 
 app.get('/about', function(req, res){
     res.render('about');
+})
+
+app.get('/miscellaneous', function(req, res){
+    res.render('list', {listTitle: " Miscellaneous", newListItems : miscellaneous});
 })
 
 app.listen(3000, function(){
