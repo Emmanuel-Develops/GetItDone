@@ -4,6 +4,11 @@ const date = require(__dirname + '/date.js');
 
 const app = express();
 
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+
 const items = ["Buy Food", "Cook Food", "Eat Food"];
 const workItems = [];
 const miscellaneous= [];
@@ -55,7 +60,5 @@ app.get('/miscellaneous', function(req, res){
     res.render('list', {listTitle: " Miscellaneous", newListItems : miscellaneous});
 })
 
-app.listen(3000, function(){
-    console.log("Listening on port 3000!")
-})
+app.listen(port);
 
