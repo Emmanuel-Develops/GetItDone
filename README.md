@@ -41,3 +41,4 @@ Voila! Play around the code as much as possible! That's how to learn.
 
 ### Here is how the application looks
 ![](https://github.com/KarenEfereyan/GetItDone/blob/master/images/main-todo.jpg)
+![](https://github.com/KarenEfereyan/GetItDone/blob/master/images/miscellaneous-todo.jpg)
