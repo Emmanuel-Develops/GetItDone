@@ -40,6 +40,5 @@ Voila! Play around the code as much as possible! That's how to learn.
 - [nodemon](https://www.npmjs.com/package/nodemon)
 
 ### Here is how the application looks
-<img align= "left" src ="https://github.com/KarenEfereyan/GetItDone/blob/master/images/main-todo.jpg" />
-<img align ="left" src = "https://github.com/KarenEfereyan/GetItDone/blob/master/images/miscellaneous-todo.jpg" />
+![](https://github.com/KarenEfereyan/GetItDone/blob/master/images/miscellaneous-todo.jpg)
 
