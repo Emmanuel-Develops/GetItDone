@@ -41,6 +41,6 @@ Voila! Play around the code as much as possible! That's how to learn.
 
 ### Here is how the application looks
 <div style="display:flex">
-  <img src = "https://github.com/KarenEfereyan/GetItDone/blob/master/images/main-todo.jpg">
-  <img src = "https://github.com/KarenEfereyan/GetItDone/blob/master/images/miscellaneous-todo.jpg">
+  <img style="width:50% " src = "https://github.com/KarenEfereyan/GetItDone/blob/master/images/main-todo.jpg">
+  <img syle="width:50%" src = "https://github.com/KarenEfereyan/GetItDone/blob/master/images/miscellaneous-todo.jpg">
 </div>
