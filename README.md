@@ -9,11 +9,11 @@ This is a very simple and minimalist todo app. It uses [ejs](https://ejs.co/) fo
 [Test](http://karenlist.herokuapp.com/) out the app.
 
 ## <b>Features</b>
-- The app renders the current date at the top of the todolist.
-- Add a list of your todos to be completed
-- Create separate todo categories for tasks to be completed. Currently, there is support for main tasks, which can be found on the homepage, for work tasks (/work) and miscellaneous tasks(/miscellaneous).
-- Easily mark off completed tasks.
-- Delete tasks that have been completed or no longer fit into the agenda for that day.
+- [x] The app renders the current date at the top of the todolist.
+- [x] Add a list of tasks you need to complete
+- [x] Separate routes for separate categories of tasks. Use the '/' route for main tasks, '/work' route for work related tasks and '/miscellaneous' for miscellaneous or extra tasks.
+- [x] Easily mark off completed tasks.
+- [x] Delete tasks that have been completed or no longer fit into the agenda for that day.
   
 ## <b>Running the Project</b>
 Want to learn how the app works or possibly suggest an improvement?
@@ -39,5 +39,9 @@ Voila! Play around the code as much as possible! That's how to learn.
 - [express](https://expressjs.com/)
 - [nodemon](https://www.npmjs.com/package/nodemon)
 
+### <b>Reporting a Vulnerability</b>
+To report a vulnerability or an issue you encountered while using this app, please send an email to <a href ="#" >kimsyefe@gmail.com</a>. This will help me assess the risks and vulnerability and make necessary changes.
+
+Thank you!!!
 ### Here is how the application looks
 ![](/../images/main-todo.jpg)
