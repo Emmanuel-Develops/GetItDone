@@ -44,4 +44,5 @@ To report a vulnerability or an issue you encountered while using this app, plea
 
 Thank you!!!
 ### Here is how the application looks
-![](/../images/main-todo.jpg)
+![](https://github.com/KarenEfereyan/GetItDone/blob/master/images/miscellaneous-todo.jpg)
+
