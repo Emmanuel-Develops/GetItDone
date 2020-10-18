@@ -40,7 +40,5 @@ Voila! Play around the code as much as possible! That's how to learn.
 - [nodemon](https://www.npmjs.com/package/nodemon)
 
 ### Here is how the application looks
-<div style="display:flex">
-  <img style="width:50% " src = "https://github.com/KarenEfereyan/GetItDone/blob/master/images/main-todo.jpg">
-  <img syle="width:50%" src = "https://github.com/KarenEfereyan/GetItDone/blob/master/images/miscellaneous-todo.jpg">
-</div>
+![alt-text-1](https://github.com/KarenEfereyan/GetItDone/blob/master/images/main-todo.jpg "image-1") ![alt-text-2](https://github.com/KarenEfereyan/GetItDone/blob/master/images/miscellaneous-todo.jpg "image-2")
+
