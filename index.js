@@ -10,7 +10,7 @@ if (port == null || port == "") {
   port = 8000;
 }
 
-const items = ["Buy Food", "Cook Food", "Eat Food"];
+//const items = ["Buy Food", "Cook Food", "Eat Food"];
 const workItems = [];
 const miscellaneous= [];
 
@@ -21,12 +21,48 @@ app.use(express.static('public'));
 
 mongoose.connect("mongodb://localhost:27017/todolistDB", { useNewUrlParser : true, useUnifiedTopology : true});
 
+//Items Schema
+const itemsSchema = {
+    name : String
+};
+
+//Item that corresponds to itemsSchema
+const Item = mongoose.model('Item', itemsSchema);
+
+const item1 = new Item({
+    name : 'Hit the + button to add a new item'
+});
+
+const item2 = new Item({
+    name : '<------ Hit this to delete an item'
+});
+
+const defaultItems = [item1, item2];
+
+Item.insertMany(defaultItems, function(err){
+    if(err){
+        console.log(err);
+    } else {
+        console.log('Successfully saved default items to DB');
+    }
+});
+
+
+
 app.get('/', function(req, res){
 
-   const day = date.getDate();
-
-    res.render('list', { listTitle : day, newListItems : items});
-})
+   //const day = date.getDate();
+   
+   Item.find({}, function(err, foundItems){
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.render('list', { listTitle : day,
+                newListItems : foundItems});
+          };
+});
+});
 
 app.post('/', function(req, res){
     const item = req.body.item;
