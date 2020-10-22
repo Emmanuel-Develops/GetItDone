@@ -23,6 +23,8 @@ const itemsSchema = {
     name : String
 };
 
+const day = date.getDate();
+
 //Item that corresponds to itemsSchema
 const Item = mongoose.model('Item', itemsSchema);
 
@@ -34,11 +36,7 @@ const item2 = new Item({
     name : 'I am a default task'
 });
 
-const item3 = new Item({
-    name : 'I am a default task'
-})
-
-const defaultItems = [item1, item2, item3];
+const defaultItems = [item1, item2];
 
 const listSchema = {
     name : String, 
@@ -49,10 +47,6 @@ const List = mongoose.model('List', listSchema);
 
 //Home Route
 app.get('/', function(req, res){
-
-
-   const day = date.getDate();
-   
    Item.find({}, function(err, foundItems){
 
         if(foundItems.length === 0, err){
@@ -67,7 +61,7 @@ app.get('/', function(req, res){
             res.redirect('/');
         }
         else{
-            res.render('list', { listTitle : 'Today',   newListItems : foundItems}); }
+            res.render('list', { listTitle : day,   newListItems : foundItems}); }
     });
 });
 
@@ -109,7 +103,7 @@ app.post('/', function(req, res){
         name : itemName
     });
 
-    if(listName === 'Today'){
+    if(listName === day){
         item.save();
         res.redirect('/');   
     }else{
