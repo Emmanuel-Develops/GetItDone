@@ -113,8 +113,6 @@ app.post('/', function(req, res){
             res.redirect('/' + listName);
         });
     }
-   
-
 });
 
 app.post('/delete', function(req, res){
