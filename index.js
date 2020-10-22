@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const date = require(__dirname + '/date.js');
+const _ = require('lodash');
 
 const app = express();
 
@@ -10,16 +11,12 @@ if (port == null || port == "") {
   port = 3000;
 }
 
-//const items = ["Buy Food", "Cook Food", "Eat Food"];
-// const workItems = [];
-// const miscellaneous= [];
-
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
 
-mongoose.connect("mongodb://localhost:27017/todolistDB", { useNewUrlParser : true, useUnifiedTopology : true});
+mongoose.connect("mongodb://localhost:27017/todolistDB", { useNewUrlParser : true, useUnifiedTopology : true, useFindAndModify: false });
 
 //Items Schema
 const itemsSchema = {
@@ -30,15 +27,15 @@ const itemsSchema = {
 const Item = mongoose.model('Item', itemsSchema);
 
 const item1 = new Item({
-    name : 'Hit the + button to add a new item'
+    name : 'I am a default task'
 });
 
 const item2 = new Item({
-    name : '<------ Hit this to delete an item'
+    name : 'I am a default task'
 });
 
 const item3 = new Item({
-    name : 'Hit to delete an item!'
+    name : 'I am a default task'
 })
 
 const defaultItems = [item1, item2, item3];
@@ -77,7 +74,7 @@ app.get('/', function(req, res){
 
 //Custom Route
 app.get("/:customListName", function(req, res){
-    const customListName = req.params.customListName;
+    const customListName = _.capitalize(req.params.customListName);
 
     List.findOne({name : customListName},
          function(err, foundList){
@@ -128,15 +125,24 @@ app.post('/', function(req, res){
 
 app.post('/delete', function(req, res){
 
-    const checkedItem = req.body.checkbox;
+ const checkedItem = req.body.checkbox;
+ const listName =req.body.listName;
 
+ if(listName === 'Today'){
     Item.findByIdAndRemove(checkedItem, function(err){
         if(!err){
             console.log('Successfully deleted item!');
             res.redirect('/');
         }
-    })
-    console.log(checkedItem);
+    });  
+ }else{
+    List.findOneAndUpdate({name:listName}, {$pull : {items : {_id : checkedItem}}}, function(err,foundList ){
+        if(!err){
+            res.redirect('/' + listName);
+        }
+        });
+    };
+   
 });
 
 app.get('/work', function(req, res){
