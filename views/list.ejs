@@ -15,13 +15,11 @@
         </form>
     <% }) %>
 
-
-
-        <!-- Form Styles -->
-        <form class="item" action="/" method = "post">
-            <input type="text" name ="newItem" placeholder="Enter a new item" autocomplete="off">
-            <button type="submit" name="list" value= <%=  listTitle %>>+</button>
-        </form>
+       <!-- Form Styles -->
+    <form class="item" action="/" method = "post">
+        <input type="text" name ="newItem" placeholder="Enter a new item" autocomplete="off">
+        <button type="submit"  name="list" value = '<%=listTitle%>' value= <%=  listTitle %>>+</button>
+    </form>
 
 </div>  
 <%- include('footer') -%>

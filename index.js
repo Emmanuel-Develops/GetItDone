@@ -70,7 +70,7 @@ app.get('/', function(req, res){
             res.redirect('/');
         }
         else{
-            res.render('list', { listTitle : day,   newListItems : foundItems}); }
+            res.render('list', { listTitle : 'Today',   newListItems : foundItems}); }
     });
 });
 
@@ -79,51 +79,51 @@ app.get('/', function(req, res){
 app.get("/:customListName", function(req, res){
     const customListName = req.params.customListName;
 
-    List.findOne({name : customeListName}, function(err, foundList){
+    List.findOne({name : customListName},
+         function(err, foundList){
         if(!err){
-            if(!foundList){
-                console.log('Does not exist');
-            }
-            console.log('Exists');
+        if(!foundList){
+
+            //Create new list then
+            const list = new List({
+                name : customListName,
+                items : defaultItems
+            });
+            
+            list.save();
+            res.redirect('/' + customListName);
+        }else {
+
+            //Show that list
+        res.render('list', { listTitle : foundList.name, newListItems : foundList.items});
         }
-    })
-    const list = new List({
-        name : customListName,
-        items : defaultItems
+       }
     });
 
-    if(list.)
+  
 });
 
 
 app.post('/', function(req, res){
     const itemName = req.body.newItem;
+    const listName = req.body.list;
+
     const item = new Item({
         name : itemName
     });
 
-    item.save();
-    res.redirect('/');
+    if(listName === 'Today'){
+        item.save();
+        res.redirect('/');   
+    }else{
+        List.findOne({name : listName}, function(err, foundList){
+            foundList.items.push(item);
+            foundList.save();
+            res.redirect('/' + listName);
+        });
+    }
+   
 
-    //Differentiate task into categories
-
-    // let listType = req.body.list;
-    // console.log("List type is:", listType);
-
-    // if(listType === 'Work'){
-    //     workItems.push(item);
-    //     res.redirect('/work');
-    // }
-    // else if(listType === "Miscellaneous"){
-    //     miscellaneous.push(item);
-    //     res.redirect('/miscellaneous');
-    // }
-    // else{
-
-    //     //items.push(item);
-    //     item.save();
-    //     res.redirect('/');  
-    // }
 });
 
 app.post('/delete', function(req, res){
