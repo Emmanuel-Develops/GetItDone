@@ -7,12 +7,12 @@ const app = express();
 
 let port = process.env.PORT;
 if (port == null || port == "") {
-  port = 8000;
+  port = 3000;
 }
 
 //const items = ["Buy Food", "Cook Food", "Eat Food"];
-const workItems = [];
-const miscellaneous= [];
+// const workItems = [];
+// const miscellaneous= [];
 
 app.set('view engine', 'ejs');
 
@@ -37,16 +37,27 @@ const item2 = new Item({
     name : '<------ Hit this to delete an item'
 });
 
-const defaultItems = [item1, item2];
+const item3 = new Item({
+    name : 'Hit to delete an item!'
+})
 
+const defaultItems = [item1, item2, item3];
 
+const listSchema = {
+    name : String, 
+    items : [itemsSchema]
+};
 
+const List = mongoose.model('List', listSchema);
 
+//Home Route
 app.get('/', function(req, res){
 
-   //const day = date.getDate();
+
+   const day = date.getDate();
    
    Item.find({}, function(err, foundItems){
+
         if(foundItems.length === 0, err){
             Item.insertMany(defaultItems, function(err){
                 if(err){
@@ -56,36 +67,77 @@ app.get('/', function(req, res){
                 }
             });
             
-            console.log(err);
+            res.redirect('/');
         }
         else{
-            res.render('list', { listTitle : day,
-                newListItems : foundItems});
-          };
-});
+            res.render('list', { listTitle : day,   newListItems : foundItems}); }
+    });
 });
 
+
+//Custom Route
+app.get("/:customListName", function(req, res){
+    const customListName = req.params.customListName;
+
+    List.findOne({name : customeListName}, function(err, foundList){
+        if(!err){
+            if(!foundList){
+                console.log('Does not exist');
+            }
+            console.log('Exists');
+        }
+    })
+    const list = new List({
+        name : customListName,
+        items : defaultItems
+    });
+
+    if(list.)
+});
+
+
 app.post('/', function(req, res){
-    const item = req.body.item;
+    const itemName = req.body.newItem;
+    const item = new Item({
+        name : itemName
+    });
+
+    item.save();
+    res.redirect('/');
 
     //Differentiate task into categories
 
-    let listType = req.body.list;
-    console.log("List type is:", listType);
+    // let listType = req.body.list;
+    // console.log("List type is:", listType);
 
-    if(listType === 'Work'){
-        workItems.push(item);
-        res.redirect('/work');
-    }
-    else if(listType === "Miscellaneous"){
-        miscellaneous.push(item);
-        res.redirect('/miscellaneous');
-    }
-    else{
-        items.push(item);
-        res.redirect('/');  
-    }
-})
+    // if(listType === 'Work'){
+    //     workItems.push(item);
+    //     res.redirect('/work');
+    // }
+    // else if(listType === "Miscellaneous"){
+    //     miscellaneous.push(item);
+    //     res.redirect('/miscellaneous');
+    // }
+    // else{
+
+    //     //items.push(item);
+    //     item.save();
+    //     res.redirect('/');  
+    // }
+});
+
+app.post('/delete', function(req, res){
+
+    const checkedItem = req.body.checkbox;
+
+    Item.findByIdAndRemove(checkedItem, function(err){
+        if(!err){
+            console.log('Successfully deleted item!');
+            res.redirect('/');
+        }
+    })
+    console.log(checkedItem);
+});
 
 app.get('/work', function(req, res){
     res.render('list', {listTitle: 'Work List', newListItems : workItems});
@@ -99,5 +151,7 @@ app.get('/miscellaneous', function(req, res){
     res.render('list', {listTitle: " Miscellaneous", newListItems : miscellaneous});
 })
 
-app.listen(port);
+app.listen(port, function(req, res){
+    console.log('Listening on port 3000!');
+});
 
