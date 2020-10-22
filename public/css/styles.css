@@ -94,7 +94,7 @@ footer {
   color: rgba(0, 0, 0, 0.5);
   text-align: center;
 }
-@media only screen and (max-width:570px){
+/* @media only screen and (max-width:570px){
   .box{
   max-width: 100%;
   margin: 50px 15px;
@@ -103,4 +103,4 @@ footer {
     margin-right: 10px;
   }
 
-}
+} */
