@@ -39,13 +39,6 @@ const item2 = new Item({
 
 const defaultItems = [item1, item2];
 
-Item.insertMany(defaultItems, function(err){
-    if(err){
-        console.log(err);
-    } else {
-        console.log('Successfully saved default items to DB');
-    }
-});
 
 
 
@@ -54,7 +47,15 @@ app.get('/', function(req, res){
    //const day = date.getDate();
    
    Item.find({}, function(err, foundItems){
-        if(err){
+        if(foundItems.length === 0, err){
+            Item.insertMany(defaultItems, function(err){
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log('Successfully saved default items to DB');
+                }
+            });
+            
             console.log(err);
         }
         else{
